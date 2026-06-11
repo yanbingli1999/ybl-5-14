@@ -36,6 +36,9 @@ export interface ExperimentConfig {
   initialHeatSources: HeatSource[];
   totalSteps: number;
   timeStep: number;
+  purpose?: string;
+  operator?: string;
+  remarks?: string;
 }
 
 export interface TemperatureSnapshot {

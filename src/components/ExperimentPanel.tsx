@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Star, Trash2, Download, Clock } from 'lucide-react';
+import { FileText, Star, Trash2, Download, Clock, MessageSquare, User, Target } from 'lucide-react';
 import useSimulationStore from '../store/useSimulationStore';
 import api from '../services/api';
 import type { ExperimentConfig, ExperimentResult } from '@shared/types';
@@ -164,6 +164,28 @@ export const ExperimentPanel: React.FC = () => {
                       {exp.materialId}
                     </span>
                   </div>
+                  {(exp.purpose || exp.operator || exp.remarks) && (
+                    <div className="mt-2 space-y-1">
+                      {exp.purpose && (
+                        <div className="flex items-start gap-1 text-xs text-slate-400">
+                          <Target className="w-3 h-3 mt-0.5 shrink-0 text-cyan-400" />
+                          <span className="truncate">{exp.purpose}</span>
+                        </div>
+                      )}
+                      {exp.operator && (
+                        <div className="flex items-center gap-1 text-xs text-slate-400">
+                          <User className="w-3 h-3 shrink-0 text-green-400" />
+                          <span className="truncate">{exp.operator}</span>
+                        </div>
+                      )}
+                      {exp.remarks && (
+                        <div className="flex items-start gap-1 text-xs text-slate-400">
+                          <MessageSquare className="w-3 h-3 mt-0.5 shrink-0 text-amber-400" />
+                          <span className="line-clamp-2">{exp.remarks.length > 40 ? exp.remarks.slice(0, 40) + '…' : exp.remarks}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="mt-2 flex items-center justify-center">
                     <button className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300">
                       <Download className="w-3 h-3" />
@@ -220,6 +242,28 @@ export const ExperimentPanel: React.FC = () => {
                       {fav.snapshots.length} 快照
                     </span>
                   </div>
+                  {(fav.config.purpose || fav.config.operator || fav.config.remarks) && (
+                    <div className="mt-2 space-y-1">
+                      {fav.config.purpose && (
+                        <div className="flex items-start gap-1 text-xs text-slate-400">
+                          <Target className="w-3 h-3 mt-0.5 shrink-0 text-cyan-400" />
+                          <span className="truncate">{fav.config.purpose}</span>
+                        </div>
+                      )}
+                      {fav.config.operator && (
+                        <div className="flex items-center gap-1 text-xs text-slate-400">
+                          <User className="w-3 h-3 shrink-0 text-green-400" />
+                          <span className="truncate">{fav.config.operator}</span>
+                        </div>
+                      )}
+                      {fav.config.remarks && (
+                        <div className="flex items-start gap-1 text-xs text-slate-400">
+                          <MessageSquare className="w-3 h-3 mt-0.5 shrink-0 text-amber-400" />
+                          <span className="line-clamp-2">{fav.config.remarks.length > 40 ? fav.config.remarks.slice(0, 40) + '…' : fav.config.remarks}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="mt-2 flex items-center justify-center">
                     <button className="flex items-center gap-1 text-xs text-yellow-400 hover:text-yellow-300">
                       <Download className="w-3 h-3" />
